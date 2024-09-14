@@ -1,5 +1,4 @@
 .idea
-app/config
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
