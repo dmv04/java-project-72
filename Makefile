@@ -1,14 +1,17 @@
-run-dist:
-	make -C app run-dist
+run:
+	make -C app run
+
+setup:
+	make -C app setup
+
+clean:
+	make -C app clean
 
 build:
 	make -C app build
 
 install:
 	make -C app install
-
-run:
-	make -C app run
 
 test:
 	make -C app test
@@ -18,9 +21,3 @@ lint:
 
 report:
 	make -C app report
-
-build-run:
-	make -C app build-run
-
-clean:
-	make -C app clean

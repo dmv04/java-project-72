@@ -1,30 +1,26 @@
-.DEFAULT_GOAL := build-run
+run:
+	./gradlew run
+
+setup:
+	gradle wrapper --gradle-version 8.5
 
 clean:
 	./gradlew clean
 
-run-dist:
-	./build/install/app/bin/app -h
-
 build:
-	./gradlew build
+	./gradlew clean build
 
 install:
-	./gradlew clean install
+	./gradlew installDist
 
-run:
-	./gradlew run --args="-h"
+lint:
+	./gradlew checkstyleMain
 
 test:
 	./gradlew test
 
-lint:
-	./gradlew checkstyleMain checkstyleTest
-
 report:
 	./gradlew jacocoTestReport
 
-build-run:
-	build run
 
 .PHONY: build
