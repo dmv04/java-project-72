@@ -1,5 +1,4 @@
 @import hexlet.code.dto.urls.UrlPage
-@import java.time.format.DateTimeFormatter
 @import hexlet.code.util.NamedRoutes
 @import hexlet.code.util.TimeFormatter
 @param UrlPage page
