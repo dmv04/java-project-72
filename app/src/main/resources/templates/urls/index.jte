@@ -1,6 +1,7 @@
 @import hexlet.code.dto.urls.UrlsPage
 @import hexlet.code.repository.UrlCheckRepository
 @import hexlet.code.util.NamedRoutes
+@import java.time.Instant
 @import java.time.format.DateTimeFormatter
 @import hexlet.code.util.TimeFormatter
 @param UrlsPage page
@@ -32,11 +33,10 @@ content = @`
                     </td>
                     <td>
                         !{var checks = UrlCheckRepository.getChecksById(url.getId());}
-                        $if (!checks.isEmpty()) {
-                        checks.get(checks.size() - 1)
-                        } else {
-                        TimeFormatter.formatTime(page.getUrl().getCreatedAt())
-                        }
+                        @if (!checks.isEmpty())
+                        !{var createdAt = TimeFormatter.formatTime(checks.get(checks.size() -1).getCreatedAt());}
+                            ${createdAt}
+                        @endif
                     </td>
                     <td>
                         ${!checks.isEmpty() ?
