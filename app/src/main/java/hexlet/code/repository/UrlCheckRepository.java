@@ -5,7 +5,7 @@ import hexlet.code.model.UrlCheck;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +23,8 @@ public class UrlCheckRepository extends BaseRepository {
             stmt.setString(3, urlCheck.getTitle());
             stmt.setString(4, urlCheck.getH1());
             stmt.setString(5, urlCheck.getDescription());
-            //var createdAt = new Timestamp(new Date().getTime());
-            var createdAt = Timestamp.valueOf(LocalDateTime.now());
+            stmt.setTimestamp(6, Timestamp.from(Instant.now()));
 
-            stmt.setTimestamp(6, createdAt);
 
             stmt.executeUpdate();
 
@@ -34,7 +32,6 @@ public class UrlCheckRepository extends BaseRepository {
 
             if (generatedKey.next()) {
                 urlCheck.setId(generatedKey.getLong(1));
-                urlCheck.setCreatedAt(createdAt);
             } else {
                 throw new SQLException("DB have not returned an id after saving an check");
             }
@@ -55,7 +52,7 @@ public class UrlCheckRepository extends BaseRepository {
                 var title = resultSet.getString("title");
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
-                var createdAt = resultSet.getTimestamp("created_at");
+                var createdAt = resultSet.getTimestamp("created_at").toInstant();
 
                 var urlCheck = new UrlCheck(urlId, statusCode, title, h1, description);
                 urlCheck.setId(id);
@@ -84,7 +81,7 @@ public class UrlCheckRepository extends BaseRepository {
                 var title = resultSet.getString("title");
                 var h1 = resultSet.getString("h1");
                 var description = resultSet.getString("description");
-                var createdAt = resultSet.getTimestamp("created_at");
+                var createdAt = resultSet.getTimestamp("created_at").toInstant();
 
                 var urlCheck = new UrlCheck(urlId, statusCode, title, h1, description);
                 urlCheck.setId(id);

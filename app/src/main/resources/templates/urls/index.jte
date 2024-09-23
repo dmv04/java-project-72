@@ -2,6 +2,7 @@
 @import hexlet.code.repository.UrlCheckRepository
 @import hexlet.code.util.NamedRoutes
 @import java.time.format.DateTimeFormatter
+@import hexlet.code.util.TimeFormatter
 @param UrlsPage page
 
 @template.layout.page(page = page,
@@ -31,10 +32,11 @@ content = @`
                     </td>
                     <td>
                         !{var checks = UrlCheckRepository.getChecksById(url.getId());}
-                        ${!checks.isEmpty() ?
-                                    checks.get(checks.size() - 1)
-                                    .getCreatedAt().toLocalDateTime()
-                                   .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) : ""}
+                        $if (!checks.isEmpty()) {
+                        checks.get(checks.size() - 1)
+                        } else {
+                        TimeFormatter.formatTime(page.getUrl().getCreatedAt())
+                        }
                     </td>
                     <td>
                         ${!checks.isEmpty() ?

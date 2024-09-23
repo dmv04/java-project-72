@@ -83,7 +83,6 @@ public class UrlsController {
         page.setFlashType((String) flashType);
 
         ctx.render("urls/show.jte", model("page", page));
-
     }
 
 }
