@@ -55,15 +55,13 @@ public class UrlsController {
         if (url != null) {
             ctx.sessionAttribute("flash", "Страница уже существует");
             ctx.sessionAttribute("flashType", "info");
-            ctx.redirect(NamedRoutes.urlsPath());
         } else {
             var newUrl = new Url(normalizedURL);
             UrlRepository.save(newUrl);
             ctx.sessionAttribute("flash", "Страница успешно добавлена");
             ctx.sessionAttribute("flashType", "success");
-            ctx.redirect(NamedRoutes.urlsPath());
         }
-
+        ctx.redirect(NamedRoutes.urlsPath());
     }
 
     public static void showUrl(Context ctx) throws SQLException {
